@@ -1,1 +1,23 @@
 /* Egen custom CSS här */
+
+body {
+
+      background: linear-gradient(#1c0333, black);
+      min-height: 100vh;
+      color: white;
+      text-align: center;
+      /*background-image: url(/MISC/images/w13383-small.jpg)*/
+
+}
+
+.card {
+
+      border-radius: 20%;
+
+      background-color: rgba(249, 249, 249, 0.05);
+      box-shadow:inset 0 0 5px rgba(255, 255, 255, 0.1);
+      box-shadow:inset 0 0 20px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      border: solid 2px rgba(255, 255, 255, 0.17)
+
+}
