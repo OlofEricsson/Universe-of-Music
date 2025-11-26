@@ -2,7 +2,7 @@
 
 body {
 
-      background: linear-gradient(#1c0333, black);
+      background: linear-gradient(#17162d, rgb(0, 0, 0));
       min-height: 100vh;
       color: white;
       text-align: center;
@@ -14,10 +14,45 @@ body {
 
       border-radius: 20%;
 
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
       background-color: rgba(249, 249, 249, 0.05);
       box-shadow:inset 0 0 5px rgba(255, 255, 255, 0.1);
       box-shadow:inset 0 0 20px rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(2px);
       border: solid 2px rgba(255, 255, 255, 0.17)
 
+}
+
+.visualizer {
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+}
+
+canvas {
+    width: 20rem;
+    max-width: 30vw;
+    border-radius: 16px;
+    background: transparent;
+}
+
+audio {
+
+      padding-bottom: 1rem;
+
+}
+
+#circle {
+  height: 10vw;
+  width: 10vw;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
 }
