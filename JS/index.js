@@ -4,6 +4,17 @@ const HEIGHT = WIDTH * 2 / 3;
 const canvas = document.querySelector('canvas');
 const audio = document.querySelector('audio');
 
+const classicC = document.querySelector("#classiccard");
+const popC = document.querySelector("#popcard");
+const hardstyleC = document.querySelector("#hardstylecard");
+const hiphopC = document.querySelector("#hiphopcard");
+
+const classicB = document.querySelector("#classiccircle");
+const popB = document.querySelector("#popcircle");
+const hardstyleB = document.querySelector("#hardstylecircle");
+const hiphopB = document.querySelector("#hiphopcircle");
+const buttons = [classicB, popB, hardstyleB, hiphopB];
+
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 const canvasCtx = canvas.getContext('2d');
@@ -49,3 +60,36 @@ function initialize() {
 
     draw();
 }
+
+function activateButton(btn) {
+  btn.style.width = '11vw';
+  btn.style.height = '11vw';
+  //lägg i array
+  classicC.style.visibility = "visible";
+  popC.style.visibility = "visible";
+  hardstyleC.style.visibility = "visible";
+  hiphopC.style.visibility = "visible";
+}
+
+function resetButtons() {
+  buttons.forEach(btn => {
+    btn.style.width = '';
+    btn.style.height = '';
+    classicC.style.visibility = "hidden";
+    popC.style.visibility = "hidden";
+    hardstyleC.style.visibility = "hidden";
+    hiphopC.style.visibility = "hidden";
+  });
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    resetButtons();
+    activateButton(btn);
+  });
+});
+
+document.addEventListener('click', () => {
+  resetButtons();
+});
