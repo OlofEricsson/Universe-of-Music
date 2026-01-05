@@ -15,6 +15,7 @@ body {
 #homelink {
 
       text-decoration: none;
+      margin-bottom: 25vh;
 
 }
 
@@ -28,7 +29,6 @@ h1 {
 #chartContainer {
   width: 1200px;
   height: 500px;
-  margin: 0 auto;
 }
 
 #myChart {
