@@ -1,13 +1,10 @@
-const WIDTH = 1080;
-const HEIGHT = WIDTH * 2 / 3;
-
-const canvas = document.querySelector('canvas');
-const audio = document.querySelector('audio');
-
 const classicC = document.querySelector("#classiccard");
 const popC = document.querySelector("#popcard");
 const hardstyleC = document.querySelector("#hardstylecard");
 const hiphopC = document.querySelector("#hiphopcard");
+const cards = [classicC, popC, hardstyleC, hiphopC]
+
+cards.forEach (card => {card.style.visibility = "hidden";})
 
 const classicB = document.querySelector("#classiccircle");
 const popB = document.querySelector("#popcircle");
@@ -15,78 +12,134 @@ const hardstyleB = document.querySelector("#hardstylecircle");
 const hiphopB = document.querySelector("#hiphopcircle");
 const buttons = [classicB, popB, hardstyleB, hiphopB];
 
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
-const canvasCtx = canvas.getContext('2d');
+const classicCan = document.querySelector('.classiccanvas');
+const popCan = document.querySelector('.popcanvas');
+const hardstyleCan = document.querySelector('.hardstylecanvas');
+const hiphopCan = document.querySelector('.hiphopcanvas');
+const canvases = [classicCan, popCan, hardstyleCan, hiphopCan]
 
-let isInitialized = false;
-audio.addEventListener('play', () => {
-  if (!isInitialized) {
-    initialize();
-    isInitialized = true
-  }
+const classicM = document.querySelector('#classicmusic');
+const popM = document.querySelector('#popmusic');
+const hardstyleM = document.querySelector('#hardstylemusic');
+const hiphopM = document.querySelector('#hiphopmusic');
+const music = [classicM, popM, hardstyleM, hiphopM];
+
+const WIDTH = 1080;
+const HEIGHT = WIDTH * 2 / 3;
+
+canvases.forEach(canvas => {
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
 })
 
-function initialize() {    
-    const audioCtx = new AudioContext();
-    const analyser = audioCtx.createAnalyser();
-    const source = audioCtx.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination)
+const classicCanCtx = canvases[0].getContext('2d');
+const popCanCtx = canvases[1].getContext('2d');
+const hardstyleCanCtx = canvases[2].getContext('2d');
+const hiphopCanCtx = canvases[3].getContext('2d');
+const canvasCtx = [classicCanCtx, popCanCtx, hardstyleCanCtx, hiphopCanCtx]
 
-    analyser.fftSize = 2048;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+var stars = document.querySelector('#stars');
+var starCtx = stars.getContext('2d');
 
-    function draw() {
-        requestAnimationFrame(draw)
+const rect = stars.getBoundingClientRect();
+stars.width = rect.width;
+stars.height = rect.height;
 
-        analyser.getByteFrequencyData(dataArray)
-
-        
-        canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
-        const barWidth = (WIDTH / bufferLength) * 6;
-        let barHeight;
-        let x = 0;
-
-        for (let i = 0; i < bufferLength; i++) {
-            barHeight =  Math.pow(dataArray[i] / 16, 2);
-            canvasCtx.fillStyle = 'rgb(255 255 255)';
-            canvasCtx.fillRect(x, (HEIGHT / 2 ) - barHeight, barWidth, barHeight * 2);
-            x += barWidth + 10;
-        }
-    }
-
-    draw();
+starCtx.fillStyle = "white";
+for (let i = 0; i < 100; i++) {
+  starCtx.fillRect(Math.floor(Math.random() * rect.width), Math.floor(Math.random() * rect.height), 2, 2);
+}
+starCtx.fillStyle = "blue";
+for (let i = 0; i < 1000; i++) {
+  starCtx.fillRect(Math.floor(Math.random() * rect.width), Math.floor(Math.random() * rect.height), 1, 1);
 }
 
-function activateButton(btn) {
+music.forEach((song, index) => {
+  song.addEventListener('play', () => {
+    stopOtherSongs(song)
+    initializeAudio(song, index);
+ });
+});
+
+function initializeAudio(song, index) {
+  const audioCtx = new AudioContext();
+  const analyser = audioCtx.createAnalyser();
+  const source = audioCtx.createMediaElementSource(song);
+
+  audioCtx.resume();
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  analyser.fftSize = 2048;
+
+  startVisualizer(analyser, canvasCtx[index]);
+
+}
+
+function startVisualizer(analyser, ctx) {
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  function draw() {
+    requestAnimationFrame(draw);
+
+    analyser.getByteFrequencyData(dataArray);
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+    const barWidth = (WIDTH / bufferLength) * 6;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const barHeight = Math.pow(dataArray[i] / 16, 2);
+
+      ctx.fillStyle = 'rgb(255 255 255)';
+      ctx.fillRect(
+        x,
+        HEIGHT / 2 - barHeight,
+        barWidth,
+        barHeight * 2
+      );
+
+      x += barWidth + 10;
+    }
+  }
+
+  draw();
+}
+
+function stopOtherSongs(currentSong) {
+  music.forEach(song => {
+    if (song !== currentSong) {
+      song.pause();
+      song.currentTime = 0;
+    }
+  });
+}
+
+
+
+function activateButton(btn, index) {
   btn.style.width = '11vw';
   btn.style.height = '11vw';
-  //lägg i array
-  classicC.style.visibility = "visible";
-  popC.style.visibility = "visible";
-  hardstyleC.style.visibility = "visible";
-  hiphopC.style.visibility = "visible";
+
+  cards[index].style.visibility = "visible";
+  cards[index].style.marginTop = "25vh";
 }
 
 function resetButtons() {
   buttons.forEach(btn => {
     btn.style.width = '';
     btn.style.height = '';
-    classicC.style.visibility = "hidden";
-    popC.style.visibility = "hidden";
-    hardstyleC.style.visibility = "hidden";
-    hiphopC.style.visibility = "hidden";
+    
+    cards.forEach (card => {card.style.visibility = "hidden";})
   });
 }
 
-buttons.forEach(btn => {
+buttons.forEach((btn, index) => {
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
     resetButtons();
-    activateButton(btn);
+    activateButton(btn, index);
   });
 });
 

@@ -1,96 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/breakpoints.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/breakpoints.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-  <title>Universe of Music</title>
-</head>
-<body>
-  <header>
-    <h1>UNIVERSE of MUSIC</h1>
-  </header>
+    <title>Universe of Music</title>
+  </head>
+  <body>
+    <canvas id="stars"></canvas>
+    <header>
+      <a href="/index.html" id="homelink">
+        <h1>UNIVERSE of MUSIC</h1>
+      </a>
+    </header>
 
-  
-  <div class="row justify-content-center">
-    <div class="card" style="width: auto;" id="classiccard">
-      <div class="card-body">
-        <h5 class="card-title">Classical</h5>
-        <p class="card-text"></p>
-        
-        <section class="visualizer">
-          <canvas></canvas>
-          <audio src='/MISC/images/audio/AntonioVivaldi_Presto.mp3' crossorigin='anonymous' controls></audio>
-        </section>
+    <div class="row justify-content-center">
+      <div class="card" style="width: auto" id="classiccard">
+        <div class="card-body">
+          <h5 class="card-title">Classical</h5>
+          <p class="card-text"></p>
 
+          <section class="visualizer">
+            <canvas class="music classiccanvas"></canvas>
+            <audio
+              id="classicmusic"
+              src="/MISC/images/audio/AntonioVivaldi_Presto.mp3"
+              crossorigin="anonymous"
+              controls
+            ></audio>
+          </section>
+        </div>
+      </div>
+
+      <div class="card" style="width: auto" id="popcard">
+        <div class="card-body">
+          <h5 class="card-title">Pop</h5>
+          <p class="card-text"></p>
+
+          <section class="visualizer">
+            <canvas class="music popcanvas"></canvas>
+            <audio
+              id="popmusic"
+              src="/MISC/images/audio/BASSIANI.mp3"
+              crossorigin="anonymous"
+              controls
+            ></audio>
+          </section>
+        </div>
+      </div>
+
+      <div class="card" style="width: auto" id="hardstylecard">
+        <div class="card-body">
+          <h5 class="card-title">Hardstyle</h5>
+          <p class="card-text"></p>
+
+          <section class="visualizer">
+            <canvas class="music hardstylecanvas"></canvas>
+            <audio
+              id="hardstylemusic"
+              src="/MISC/images/audio/Hardstyle(uptempo_hardcore).mp3"
+              crossorigin="anonymous"
+              controls
+            ></audio>
+          </section>
+        </div>
+      </div>
+
+      <div class="card" style="width: auto" id="hiphopcard">
+        <div class="card-body">
+          <h5 class="card-title">Hip Hop</h5>
+          <p class="card-text"></p>
+
+          <section class="visualizer">
+            <canvas class="music hiphopcanvas"></canvas>
+            <audio
+              id="hiphopmusic"
+              src="/MISC/images/audio/HateItOrLoveIt.mp3"
+              crossorigin="anonymous"
+              controls
+            ></audio>
+            <!-- låttips rappers delight -->
+          </section>
+        </div>
       </div>
     </div>
 
-    <div class="card " style="width: auto;" id="popcard">
-      <div class="card-body">
-        <h5 class="card-title">Pop</h5>
-        <p class="card-text"></p>
+    <section class="circle" id="classiccircle"></section>
+    <section class="circle" id="popcircle"></section>
+    <section class="circle" id="hardstylecircle"></section>
+    <section class="circle" id="hiphopcircle"></section>
 
-        <section class="visualizer">
-          <canvas></canvas>
-          <audio src='/MISC/images/audio/AntonioVivaldi_Presto.mp3' crossorigin='anonymous' controls></audio>
-        </section>
-      </div>
-    </div>
+    <a href="/stats.html">
+      <svg
+        id="statbutton"
+        width="615"
+        height="450"
+        viewBox="0 0 615 450"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect class="bar barL" width="167" height="442" rx="25" fill="white" />
 
-    <div class="card " style="width: auto;" id="hardstylecard">
-      <div class="card-body">
-        <h5 class="card-title">Hardstyle</h5>
-        <p class="card-text"></p>
+        <rect
+          class="bar barM"
+          x="222"
+          width="167"
+          height="442"
+          rx="25"
+          fill="white"
+        />
 
-        <section class="visualizer">
-          <canvas></canvas>
-          <audio src='/MISC/images/audio/AntonioVivaldi_Presto.mp3' crossorigin='anonymous' controls></audio>
-        </section>
-      </div>
-    </div>
+        <rect
+          class="bar barR"
+          x="444"
+          width="167"
+          height="442"
+          rx="25"
+          fill="white"
+        />
 
-    <div class="card " style="width: auto;" id="hiphopcard">
-      <div class="card-body">
-        <h5 class="card-title">Hip Hop</h5>
-        <p class="card-text"></p>
+        <defs>
+          <filter
+            id="filter0_d_1_8"
+            x="440"
+            y="0"
+            width="175"
+            height="450"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+          >
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"
+            />
+            <feOffset dy="4" />
+            <feGaussianBlur stdDeviation="2" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+            />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_8"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_8"
+              result="shape"
+            />
+          </filter>
+        </defs>
+      </svg>
+    </a>
 
-        <section class="visualizer">
-          <canvas></canvas>
-          <audio src='/MISC/images/audio/AntonioVivaldi_Presto.mp3' crossorigin='anonymous' controls></audio>
-          <!-- låttips rappers delight -->
-        </section>
-      </div>
-    </div>
-  </div>
+    <img src="/MISC/images/mountains2transparent.png" id="mountains" />
 
-  <section class="circle" id="classiccircle">
-
-  </section>
-  <section class="circle" id="popcircle">
-    
-  </section>
-  <section class="circle" id="hardstylecircle">
-    
-  </section>
-  <section class="circle" id="hiphopcircle">
-    
-  </section>
-
-  <img src="/MISC/images/mountains2transparent.png" id="mountains">
-
-  <script src="/JS/index.js"></script> 
-</body>
+    <script src="/JS/index.js"></script>
+  </body>
 </html>

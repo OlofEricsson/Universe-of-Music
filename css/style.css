@@ -16,15 +16,51 @@ body {
 
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,0) 55%,
+      rgba(0,0,0,0.35) 100%
+    );
+}
+
+#stars {
+
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      z-index: -10;
+      min-height: 100vh;
+      max-width: 100vw;
+
+}
+
+#homelink {
+
+      text-decoration: none;
+      text-shadow:0 0 5px rgb(255, 255, 255);
+
+}
+
 h1 {
 
       font-weight: bolder;
+      color: white;
 
 }
 
 .card {
 
-      border-radius: 20%;
+      position: fixed;
+
+      border-radius: 3rem;
 
       display: flex;
       align-items: center;
@@ -32,12 +68,12 @@ h1 {
       justify-content: center;
       z-index: 1;
 
-      background-color: rgba(249, 249, 249, 0.05);
+      background-color: rgba(249, 249, 249, 0.047);
+      text-shadow:0 0 3px rgb(255, 255, 255);
       box-shadow:inset 0 0 5px rgba(255, 255, 255, 0.1);
       box-shadow:inset 0 0 20px rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(2px);
-      border: solid 2px rgba(255, 255, 255, 0.17)
-
+      backdrop-filter: blur(1px);
+      border: solid 2px rgba(255, 255, 255, 0.265);
 }
 
 .visualizer {
@@ -49,7 +85,7 @@ h1 {
 
 }
 
-canvas {
+.music {
     width: 20rem;
     max-width: 30vw;
     border-radius: 16px;
@@ -64,9 +100,12 @@ audio {
 
 .circle {
   height: 10vw;
+  min-height: 80px;
   width: 10vw;
+  min-width: 80px;
   border-radius: 50%;
   display: inline-block;
+  box-shadow: 0 0 20px rgba(0, 179, 255, 0.353);
 }
 
 #classiccircle {
@@ -77,6 +116,7 @@ audio {
       top: 25%;
       left: 1rem;
       transition: all var(--ease-time) ease-in-out;
+      cursor: pointer;
 
 }
 
@@ -88,6 +128,7 @@ audio {
       top: 25%;
       right: 1rem;
       transition: all var(--ease-time) ease-in-out;
+      cursor: pointer;
 
 }
 
@@ -99,6 +140,7 @@ audio {
       bottom: 25%;
       right: 1rem;
       transition: all var(--ease-time) ease-in-out;
+      cursor: pointer;
 
 }
 
@@ -110,7 +152,45 @@ audio {
       bottom: 25%;
       left: 1rem;
       transition: all var(--ease-time) ease-in-out;
+      cursor: pointer;
 
+}
+
+
+
+#statbutton {
+
+      z-index: 2;
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      width: 6vh;
+      height: 6vh;
+      margin: 1rem;
+      filter: opacity(50%);
+      cursor: pointer;
+
+}
+
+
+.bar {
+  transform-origin: bottom;
+  transform-box: fill-box;
+  transition: transform 0.3s ease-in-out;
+}
+
+#statbutton:hover .barL {
+  transform: scaleY(1.1);
+}
+
+#statbutton:hover .barM {
+  transform: scaleY(1.17);
+  transition-delay: 0.05s;
+}
+
+#statbutton:hover .barR {
+  transform: scaleY(1.13);
+  transition-delay: 0.1s;
 }
 
 #mountains {
@@ -124,5 +204,5 @@ audio {
       left: 0px;
       z-index: -2;
 
-      filter: sepia(100%) saturate(300%) brightness(40%) hue-rotate(190deg);
+      filter: sepia(100%) saturate(300%) brightness(30%) hue-rotate(190deg);
 }
